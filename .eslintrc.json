@@ -1,0 +1,15 @@
+{
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "extends": ["plugin:@typescript-eslint/recommended"],
+  "ignorePatterns": [
+    "dist/**/*",
+    "node_modules/**/*",
+    "webpack*.config.js",
+    "tsconfig.json",
+    ".eslint*",
+    ".prettier*",
+    "jest.*.js",
+    "babel*"
+  ]
+}
