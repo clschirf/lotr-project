@@ -20,20 +20,39 @@ module.exports = {
         exclude: /node_modules/,
         use: 'ts-loader',
       },
-
       {
         test: /\.(jsx?)$/,
         exclude: /node_modules/,
         use: { loader: 'babel-loader' },
       },
+      {
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: "asset/resource",
+      },
     ],
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js', '.jsx'],
+    modules: [
+      'src',
+      'node_modules',
+    ],
+    extensions: [
+      '.tsx',
+      '.ts',
+      '.js',
+      '.jsx',
+      '.json',
+      '.png',
+      '.svg',
+      '.jpeg',
+      '.jpg',
+      '*'
+    ],
   },
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist'),
+    clean: true,
   },
   devServer: {
     headers: {

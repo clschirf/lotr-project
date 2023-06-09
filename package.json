@@ -10,6 +10,7 @@
   },
   "scripts": {
     "build": "webpack",
+    "build:debug": "webpack --stats-error-details",
     "start": "webpack serve",
     "test": "jest",
     "test:coverage": "jest --collect-coverage",
