@@ -1,39 +1,18 @@
-import { SyntheticEvent, useEffect, useState } from 'react';
-import styled from '@emotion/styled';
+import { useEffect, useState } from 'react';
 import { fetchCharacters, CharacterResponseType } from 'apis/lotrApi';
 import CharacterList from 'components/CharacterList';
 import CharacterType from 'types/character';
 import EmptyState from 'library/EmptyState';
-import FilterSelector from 'library/FilterSelector';
-import Search from 'library/Search';
 import { transformCharacters } from 'utils/characterUtils';
-
-const FilterBar = styled.div`
-  display: flex;
-  flex-direction: row;
-
-  & > * {
-    padding: 1em;
-  }
-`;
-
-const DWARF = 'dwarf';
-const ELF = 'elf';
-const HOBBIT = 'hobbit';
-const HUMAN = 'human';
-
-const MALE = 'male';
-const FEMALE = 'female';
+import FilterBar, { FiltersType } from 'components/FilterBar';
 
 const App = (): JSX.Element => {
   const [loading, setLoading] = useState(true);
   const [characters, setCharacters] = useState([] as CharacterType[]);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [raceFilter, setRaceFilter] = useState('');
-  const [genderFilter, setGenderFilter] = useState('');
   const [displayedCharacters, setDisplayedCharacters] = useState(
     [] as CharacterType[],
   );
+  const [filters, setFilters] = useState({} as FiltersType);
 
   useEffect(() => {
     fetchCharacters()
@@ -47,22 +26,26 @@ const App = (): JSX.Element => {
       .finally(() => setLoading(false));
   }, []);
 
-  const handleSubmitSearch = (event: SyntheticEvent) => {
-    setSearchTerm((event.target as HTMLInputElement).value);
-  };
-
-  const handleSubmitRaceFilter = (choice: string) => {
-    setRaceFilter(choice);
-  };
-
-  const handleSubmitGenderFilter = (choice: string) => {
-    setGenderFilter(choice);
+  const handleSubmitFilters = (filters: FiltersType) => {
+    setFilters(filters);
   };
 
   const filterCharacters = () => {
-    let matching = characters.filter(
-      c => c.characterName.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1,
-    );
+    let matching = characters.slice();
+
+    if (!filters) {
+      setDisplayedCharacters(matching);
+      return;
+    }
+
+    const { searchTerms, raceFilter, genderFilter } = filters;
+
+    if (searchTerms) {
+      const searchLc = searchTerms.toLowerCase();
+      matching = matching.filter(
+        c => c.characterName.toLowerCase().indexOf(searchLc) > -1,
+      );
+    }
 
     if (raceFilter) {
       matching = matching.filter(
@@ -81,27 +64,15 @@ const App = (): JSX.Element => {
 
   useEffect(() => {
     filterCharacters();
-  }, [characters, searchTerm, raceFilter, genderFilter]);
+  }, [characters, filters]);
 
   if (loading) {
     return <div>LOADING!</div>;
   }
 
-  return <EmptyState />;
-
   return (
     <div>
-      <FilterBar>
-        <Search handleOnChange={handleSubmitSearch} />
-        <FilterSelector
-          options={[DWARF, ELF, HUMAN, HOBBIT]}
-          handleOnChange={handleSubmitRaceFilter}
-        />
-        <FilterSelector
-          options={[FEMALE, MALE]}
-          handleOnChange={handleSubmitGenderFilter}
-        />
-      </FilterBar>
+      <FilterBar handleSubmitFilters={handleSubmitFilters} />
       {!displayedCharacters || displayedCharacters.length === 0 ? (
         <EmptyState />
       ) : (

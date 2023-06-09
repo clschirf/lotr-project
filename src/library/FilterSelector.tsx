@@ -20,9 +20,18 @@ const FilterSelectorBar = styled.form`
   }
 `;
 
-type FilterSelectorProps = {
+const Icon = styled.img`
+  height: 2em;
+`;
+
+export type FilterSelectorOptionType = {
+  optionName: string;
+  icon?: string;
+};
+
+export type FilterSelectorProps = {
   handleOnChange: Function;
-  options: string[];
+  options: FilterSelectorOptionType[];
 };
 
 const FilterSelector = (props: FilterSelectorProps) => {
@@ -30,7 +39,7 @@ const FilterSelector = (props: FilterSelectorProps) => {
 
   const handleChoice = (event: SyntheticEvent) => {
     event.preventDefault();
-    const val = (event.target as HTMLButtonElement).value;
+    const val = (event.currentTarget as HTMLButtonElement).value;
     chosen === val ? setChosen('') : setChosen(val);
   };
 
@@ -40,14 +49,15 @@ const FilterSelector = (props: FilterSelectorProps) => {
 
   return (
     <FilterSelectorBar>
-      {props.options.map((o: string) => {
+      {props.options.map((o: FilterSelectorOptionType) => {
         return (
           <button
-            className={chosen === o ? 'picked' : ''}
+            key={o.optionName}
+            className={chosen === o.optionName ? 'picked' : ''}
             onClick={handleChoice}
-            value={o}
+            value={o.optionName}
           >
-            {o}
+            {!!o.icon ? <Icon src={o.icon} alt={o.optionName} /> : o.optionName}
           </button>
         );
       })}
