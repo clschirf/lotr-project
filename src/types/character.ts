@@ -34,7 +34,7 @@ type CharacterType = {
   realm?: string; // TODO: turn this into an enum
   hair?: string;
   characterName: string;
-  wikiUrl: string;
+  wikiUrl?: string;
 };
 
 export default CharacterType;

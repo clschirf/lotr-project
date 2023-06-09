@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { fetchCharacters } from '../lotrApi';
-import mockCharacterResponse from './mockCharacterResp.json';
+import mockCharacterResponse from '../../fixtures/mockCharacterResp.json';
 import { getLotrApiToken } from '../../utils/authUtils';
 
 jest.mock('axios');
