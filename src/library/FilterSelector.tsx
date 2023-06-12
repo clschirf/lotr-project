@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import { SyntheticEvent } from 'react';
+import SvgIcon from 'library/SvgIcon';
 
 const FilterSelectorBar = styled.form`
   display: flex;
@@ -10,23 +11,32 @@ const FilterSelectorBar = styled.form`
     padding: 0 0.5em;
   }
 
-  button {
-    border: 0;
-    background: none;
-  }
-
   .picked {
-    background-color: #52fa7a;
+    fill: #52fa7a;
+    color: #52fa7a;
   }
 `;
 
-const Icon = styled.img`
-  height: 2em;
+const Selection = styled.div`
+  &:hover {
+    color: #52fa7a;
+  }
+`;
+
+const IconButton = styled.button`
+  height: 2.5em;
+  border: 0;
+  background: none;
+
+  &:hover {
+    fill: #52fa7a;
+  }
 `;
 
 export type FilterSelectorOptionType = {
   optionName: string;
-  icon?: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  icon?: any; // TODO: figure out correct type for TS
 };
 
 export type FilterSelectorProps = {
@@ -51,14 +61,21 @@ const FilterSelector = (props: FilterSelectorProps) => {
     <FilterSelectorBar>
       {props.options.map((o: FilterSelectorOptionType) => {
         return (
-          <button
+          <IconButton
             key={o.optionName}
             className={chosen === o.optionName ? 'picked' : ''}
             onClick={handleChoice}
             value={o.optionName}
           >
-            {!!o.icon ? <Icon src={o.icon} alt={o.optionName} /> : o.optionName}
-          </button>
+            {!!o.icon ? (
+              <Selection>
+                <SvgIcon svgRef={o.icon} />
+                <div>{o.optionName}</div>
+              </Selection>
+            ) : (
+              o.optionName
+            )}
+          </IconButton>
         );
       })}
     </FilterSelectorBar>
