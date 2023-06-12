@@ -26,16 +26,17 @@ module.exports = {
         use: { loader: 'babel-loader' },
       },
       {
-        test: /\.(png|svg|jpg|jpeg|gif)$/i,
-        type: "asset/resource",
+        test: /\.(png|jpg|jpeg|gif)$/i,
+        type: 'asset/resource',
+      },
+      {
+        test: /\.svg$/,
+        use: ['@svgr/webpack'],
       },
     ],
   },
   resolve: {
-    modules: [
-      'src',
-      'node_modules',
-    ],
+    modules: ['src', 'node_modules'],
     extensions: [
       '.tsx',
       '.ts',
@@ -46,7 +47,7 @@ module.exports = {
       '.svg',
       '.jpeg',
       '.jpg',
-      '*'
+      '*',
     ],
   },
   output: {

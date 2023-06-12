@@ -28,9 +28,9 @@
       "library/*": ["src/library/*"],
       "utils/*": ["src/utils/*"],
       "types/*": ["src/types/*"],
-      "assets/*": ["src/assets/*"],
+      "assets/*": ["src/assets/*"]
     }
   },
   "compileOnSave": true,
-  "exclude": ["node_modules"],
+  "exclude": ["node_modules"]
 }
