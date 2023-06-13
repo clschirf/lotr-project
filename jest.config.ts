@@ -13,6 +13,7 @@ const config: Config = {
   },
   moduleNameMapper: {
     '^.+\\.(jpg|jpeg|png|gif)$': '<rootDir>/test-config/asset-mock.js',
+    '^.+\\.(svg)$': '<rootDir>/test-config/svg-mock.js',
   },
   setupFilesAfterEnv: ['./jest.setup.ts'],
   clearMocks: true,
