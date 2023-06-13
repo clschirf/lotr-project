@@ -5,6 +5,7 @@ import CharacterType from 'types/character';
 import EmptyState from 'library/EmptyState';
 import { transformCharacters } from 'utils/characterUtils';
 import FilterBar, { FiltersType } from 'components/FilterBar';
+import CollapsibleBox from 'library/CollapsibleBox';
 
 const App = (): JSX.Element => {
   const [loading, setLoading] = useState(true);
@@ -71,14 +72,16 @@ const App = (): JSX.Element => {
   }
 
   return (
-    <div>
-      <FilterBar handleSubmitFilters={handleSubmitFilters} />
+    <>
+      <CollapsibleBox title='Filters'>
+        <FilterBar handleSubmitFilters={handleSubmitFilters} />
+      </CollapsibleBox>
       {!displayedCharacters || displayedCharacters.length === 0 ? (
         <EmptyState />
       ) : (
         <CharacterList characters={displayedCharacters} />
       )}
-    </div>
+    </>
   );
 };
 

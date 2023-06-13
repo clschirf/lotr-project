@@ -2,6 +2,13 @@ import { SyntheticEvent, useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import FilterSelector from 'library/FilterSelector';
 import Search from 'library/Search';
+import FEMALE_ICON from 'assets/venus.svg';
+import MALE_ICON from 'assets/mars.svg';
+import DWARF_ICON from 'assets/dwarf.svg';
+import ELF_ICON from 'assets/elf.svg';
+import HUMAN_ICON from 'assets/footman.svg';
+import HOBBIT_ICON from 'assets/hobbit-door.svg';
+import MAAIR_ICON from 'assets/maiar.svg';
 
 export type FiltersType = {
   searchTerms?: string;
@@ -15,11 +22,16 @@ export type FilterBarProps = {
 
 const FilterBarContainer = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 
   & > * {
     padding: 1em;
   }
+`;
+
+const FilterHeader = styled.h1`
+  color: #9c9c9c;
+  font-size: 1em;
 `;
 
 const DWARF = 'dwarf';
@@ -60,28 +72,31 @@ const FilterBar = (props: FilterBarProps) => {
   return (
     <FilterBarContainer>
       <section>
+        <FilterHeader>Search by name</FilterHeader>
+        <Search handleOnChange={handleSubmitSearch} />
+      </section>
+      <section>
+        <FilterHeader>Race</FilterHeader>
         <FilterSelector
           options={[
-            { optionName: DWARF, icon: require('assets/dwarf.png') },
-            { optionName: ELF, icon: require('assets/elf.png') },
-            { optionName: HUMAN, icon: require('assets/footman.png') },
-            { optionName: HOBBIT, icon: require('assets/hobbit-door.png') },
-            { optionName: MAIAR, icon: require('assets/zeus.png') },
+            { optionName: DWARF, icon: DWARF_ICON },
+            { optionName: ELF, icon: ELF_ICON },
+            { optionName: HUMAN, icon: HUMAN_ICON },
+            { optionName: HOBBIT, icon: HOBBIT_ICON },
+            { optionName: MAIAR, icon: MAAIR_ICON },
           ]}
           handleOnChange={handleSubmitRaceFilter}
         />
       </section>
       <section>
+        <FilterHeader>Gender</FilterHeader>
         <FilterSelector
           options={[
-            { optionName: FEMALE, icon: require('assets/female2.png') },
-            { optionName: MALE, icon: require('assets/male.png') },
+            { optionName: FEMALE, icon: FEMALE_ICON },
+            { optionName: MALE, icon: MALE_ICON },
           ]}
           handleOnChange={handleSubmitGenderFilter}
         />
-      </section>
-      <section>
-        <Search handleOnChange={handleSubmitSearch} />
       </section>
     </FilterBarContainer>
   );
