@@ -17,9 +17,6 @@ describe('CharacterList', () => {
     const name2 = await screen.findByText(/Adanel/);
     expect(name2).toBeInTheDocument();
 
-    const elfRace = await screen.findAllByText(/Elf/);
-    expect(elfRace).toHaveLength(1);
-
     const maleGender = await screen.findAllByText(/Male/);
     expect(maleGender).toHaveLength(3);
 

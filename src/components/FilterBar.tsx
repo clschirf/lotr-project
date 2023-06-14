@@ -8,7 +8,8 @@ import DWARF_ICON from 'assets/dwarf.svg';
 import ELF_ICON from 'assets/elf.svg';
 import HUMAN_ICON from 'assets/footman.svg';
 import HOBBIT_ICON from 'assets/hobbit-door.svg';
-import MAAIR_ICON from 'assets/maiar.svg';
+import MAIAR_ICON from 'assets/maiar.svg';
+import DRAGON_ICON from 'assets/dragon.svg';
 
 export type FiltersType = {
   searchTerms?: string;
@@ -39,6 +40,22 @@ const ELF = 'elf';
 const HOBBIT = 'hobbit';
 const HUMAN = 'human';
 const MAIAR = 'maiar';
+const DRAGON = 'dragons';
+// ainur
+// wraith
+// dragons
+// Black Uruk
+// Great Spiders
+// Orcs
+// Ent
+// dirty data:
+// some are plural eg 'elves'
+// 'men' & 'human'
+// some entries have multiple races (men,wraith)
+// handle NaNs
+
+// allow for multiple possible search terms for the same category (split name to show and terms for search)
+// add sorting (alphabetical, year born, yearn died) | asc + desc
 
 const MALE = 'male';
 const FEMALE = 'female';
@@ -83,7 +100,8 @@ const FilterBar = (props: FilterBarProps) => {
             { optionName: ELF, icon: ELF_ICON },
             { optionName: HUMAN, icon: HUMAN_ICON },
             { optionName: HOBBIT, icon: HOBBIT_ICON },
-            { optionName: MAIAR, icon: MAAIR_ICON },
+            { optionName: MAIAR, icon: MAIAR_ICON },
+            { optionName: DRAGON, icon: DRAGON_ICON },
           ]}
           handleOnChange={handleSubmitRaceFilter}
         />
