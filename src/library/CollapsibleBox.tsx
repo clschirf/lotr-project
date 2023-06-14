@@ -42,13 +42,13 @@ const CollapsibleBox = (props: CollapsibleBoxProps) => {
 
   return (
     <CollapsibleContainer className={expanded ? 'expanded' : ''}>
-      <ControlBar>
+      <ControlBar onClick={toggleExpand}>
         <div>{props.title}</div>
-        <div onClick={toggleExpand}>
+        <div>
           {expanded ? (
-            <SvgIcon svgRef={MINUS_CIRCLE_ICON} height="1em" width="1em" />
+            <SvgIcon svgRef={MINUS_CIRCLE_ICON} size="1em" />
           ) : (
-            <SvgIcon svgRef={PLUS_CIRCLE_ICON} height="1em" width="1em" />
+            <SvgIcon svgRef={PLUS_CIRCLE_ICON} size="1em" />
           )}
         </div>
       </ControlBar>
