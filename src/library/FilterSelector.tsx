@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import { SyntheticEvent } from 'react';
 import SvgIcon from 'library/SvgIcon';
+import { bodyColor, primaryColor } from 'library/palette';
 
 const FilterSelectorBar = styled.form`
   display: flex;
@@ -10,16 +11,18 @@ const FilterSelectorBar = styled.form`
   & > * {
     padding: 0 0.5em;
   }
+  
+  color: ${bodyColor};
 
   .picked {
-    fill: #52fa7a;
-    color: #52fa7a;
+    fill: ${primaryColor};
+    color: ${primaryColor};
   }
 `;
 
 const Selection = styled.div`
   &:hover {
-    color: #52fa7a;
+    color: ${primaryColor};
   }
 `;
 
@@ -29,7 +32,7 @@ const IconButton = styled.button`
   background: none;
 
   &:hover {
-    fill: #52fa7a;
+    fill: ${primaryColor};
   }
 `;
 
